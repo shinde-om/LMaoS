@@ -5,6 +5,11 @@
 @source "../../../../packages/ui/src/**/*.{js,ts,jsx,tsx}";
 @custom-variant dark (&:is(.dark *));
 
+::selection {
+	background: white;
+  color: black;
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
