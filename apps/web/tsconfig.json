@@ -6,7 +6,18 @@
         "name": "next"
       }
     ],
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@repo/ui/*": [
+        "../../packages/ui/src/*"
+      ],
+      "@components/*": [
+        "./components/*"
+      ]
+    }
   },
   "include": [
     "**/*.ts",
@@ -18,12 +29,4 @@
   "exclude": [
     "node_modules"
   ],
-  "paths": {
-    "@/*": [
-      "./src/*"
-    ],
-    "@repo/ui/*": [
-      "../../packages/ui/src/*"
-    ]
-  }
 }
