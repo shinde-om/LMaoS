@@ -1,11 +1,9 @@
-import Header from "./_components/header";
 import "./page.css";
 
 export default function Home() {
   return (
     <main>
       <section className="relative h-dvh flex justify-center items-center">
-        <Header />
         <article className="relative flex justify-center items-center flex-col gap-15 p-10 max-w-dvw">
           <h1 className="sm:text-5xl text-4xl text-center font-bold font-stretch-extra-condensed">
             Learning Management as&nbsp;

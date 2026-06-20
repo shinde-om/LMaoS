@@ -24,10 +24,7 @@ export default function SmMenu() {
   return (
     <div>
       <div
-        className={
-          "sm:hidden hover:bg-stone-900 p-2 rounded-md " +
-          (isActive ? "bg-stone-900" : "")
-        }
+        className="sm:hidden hover:bg-stone-900 p-2 rounded-md"
         onClick={() => setIsActive(!isActive)}
         aria-expanded={isActive}
       >
@@ -36,7 +33,11 @@ export default function SmMenu() {
       {isActive && (
         <div className="h-dvh absolute flex flex-col gap-5 items-center top-16 left-0 w-dvw backdrop-blur-md transition-all duration-100 animate-in fade-in overflow-hidden">
           {list.map((value, index) => (
-            <Link href={value.link} key={index} className="p-4 w-11/12 border-b first:mt-5 border-stone-700 align-middle">
+            <Link
+              href={value.link}
+              key={index}
+              className="p-4 w-11/12 border-b first:mt-5 border-stone-700 align-middle"
+            >
               {value.name}
             </Link>
           ))}
