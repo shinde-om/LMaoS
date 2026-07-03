@@ -3,6 +3,7 @@
 ## backend
 - Framework: [NestJS](https://nestjs.com/)
 - Database: `@workspace/db` (to be implemented)
+- Authentication: `@workspace/auth` 
 
 ## web
 - Framework: [Next.js](https://nextjs.org/)
@@ -21,6 +22,9 @@
 - CSS Framework: [Tailwind](https://tailwindcss.com/), [PostCSS](https://postcss.org/)
 - Component Library: [Lucide React](https://lucide.dev/guide/react/), [shadcn](https://ui.shadcn.com/)
 
+## auth (`@workspace/auth`)
+- Framework: [Better-Auth](https://better-auth.com/)
+- Database: `@workspace/db`
 
 ## eslint-config (`@workspace/eslint-config`)
 - Self explainator
