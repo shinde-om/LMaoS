@@ -6,6 +6,8 @@ async function bootstrap() {
     bodyParser: false,
   })
 
+  app.setGlobalPrefix("/api")
+
   app.enableCors({
     origin: "http://localhost:3000",
     credentials: true,
