@@ -1,0 +1,19 @@
+{
+  "name": "@workspace/auth",
+  "version": "0.0.0",
+  "exports": {
+    ".": "./lib/auth.ts"
+  },
+  "packageManager": "pnpm@10.33.4",
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
+    "@workspace/db": "workspace:*",
+    "better-auth": "^1.6.23",
+    "pg": "^8.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.0",
+    "@workspace/typescript-config": "workspace:*"
+  }
+}
