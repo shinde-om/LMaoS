@@ -1,28 +1,30 @@
-import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
-import "@repo/ui/global.css";
-import Header from "./_components/header";
+import { Geist, Geist_Mono, Inter } from "next/font/google"
 
-const roboto = Roboto({
+import "@workspace/ui/globals.css"
+import { ThemeProvider } from "@/components/theme-provider"
+import { cn } from "@workspace/ui/lib/utils";
+
+const inter = Inter({subsets:['latin'],variable:'--font-sans'})
+
+const fontMono = Geist_Mono({
   subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "LMaoS",
-  description: "Learning Management as Open Source",
-};
+  variable: "--font-mono",
+})
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
-    <html lang="en" data-theme="dark" className="bg-black text-white overflow-x-hidden">
-      <body className={`${roboto.className} subpixel-antialiased`}>
-        <Header />
-        {children}
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={cn("antialiased", fontMono.variable, "font-sans", inter.variable)}
+    >
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

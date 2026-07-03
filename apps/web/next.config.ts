@@ -1,7 +1,7 @@
-import type { NextConfig } from 'next';
+import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@repo/ui"], // ensures UI package is compiled
-};
+  transpilePackages: ["@workspace/ui"],
+}
 
-export default nextConfig;
+export default nextConfig

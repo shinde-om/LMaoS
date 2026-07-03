@@ -1,16 +1,15 @@
 {
-  "extends": "@repo/typescript-config/base.json",
+  "extends": "@workspace/typescript-config/base.json",
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "strictNullChecks": true,
     "types": ["node"],
-    "rootDir": ".",
     "paths": {
-      "@repo/db": ["./src/index.ts"]
+      "@workspace/db": ["./src/index.ts"]
     }
   },
-  "include": ["src", "prisma.config.ts"],
+  "include": ["."],
   "exclude": ["node_modules", "dist"]
 }
