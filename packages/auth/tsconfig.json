@@ -10,6 +10,6 @@
       "@workspace/auth": ["./lib/auth.ts"]
     }
   },
-  "include": ["lib"],
+  "include": ["."],
   "exclude": ["node_modules", "dist"]
 }

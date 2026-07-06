@@ -1,9 +1,11 @@
 import { createAuthClient } from "better-auth/client"
-import { organizationClient } from "better-auth/client/plugins"
+import { inferAdditionalFields } from "better-auth/client/plugins"
+import { auth } from "./auth"
 
 export const authClient = createAuthClient({
   baseURL: process.env.BETTER_AUTH_URL,
+  basePath: "/api",
   plugins: [
-    organizationClient()
+    inferAdditionalFields<typeof auth>()
   ]
 })

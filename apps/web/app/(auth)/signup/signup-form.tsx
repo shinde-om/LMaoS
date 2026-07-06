@@ -10,6 +10,8 @@ import {
 } from "@workspace/ui/components/field"
 import { Input } from "@workspace/ui/components/input"
 import { SubmitEvent, useState } from "react"
+import Link from "next/link"
+import { authClient } from "@workspace/auth/auth-client"
 
 const names = ["Om Shinde", "Kanchan Barai"]
 
@@ -18,15 +20,26 @@ export function SignupForm({
   ...props
 }: React.ComponentProps<"form">) {
   const [placeholder] = useState(() => names[Math.floor(Math.random() * 2)]!)
-  const [name, setName] = useState<string>("")
-  const [email, setEmail] = useState<string>("")
-  const [password, setPassword] = useState<string>("")
-  const [confirmPassword, setConfirmPassword] = useState<string>("")
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [disabled, setDisabled] = useState(false);
 
-  function submit(e: SubmitEvent<HTMLFormElement>) {
+  async function submit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault()
+    setDisabled(true)
 
     console.log(name, email, password, confirmPassword)
+
+    const { data, error } = await authClient.signUp.email({
+      name,
+      email,
+      password,
+      callbackURL: 'http://localhost:3000/dashboard'
+    })
+
+    setDisabled(false)
   }
 
   return (
@@ -85,15 +98,21 @@ export function SignupForm({
             id="confirm-password"
             type="password"
             onChange={(e) => setConfirmPassword(e.target.value)}
-            aria-invalid={password !== confirmPassword && !(password === "" || confirmPassword === "") }
+            aria-invalid={
+              password !== confirmPassword && 
+              !(password === "" || confirmPassword === "") 
+            }
             required
-          /> {
-            (password !== confirmPassword && !(password === "" || confirmPassword === "")) && <FieldDescription>Both the passwords should match.</FieldDescription>
+          /> {(
+              password !== confirmPassword 
+              && !(password === "" || confirmPassword === "")
+            ) 
+            && <FieldDescription>Both the passwords should match.</FieldDescription>
           }
           <FieldDescription>Please confirm your password.</FieldDescription>
         </Field>
         <Field>
-          <Button type="submit">Create Account</Button>
+          <Button type="submit" disabled={disabled}>Create Account</Button>
         </Field>
         <FieldSeparator>Or continue with</FieldSeparator>
         <Field>
@@ -107,7 +126,7 @@ export function SignupForm({
             Sign up with Google
           </Button>
           <FieldDescription className="px-6 text-center">
-            Already have an account? <a href="/signin">Sign in</a>
+            Already have an account? <Link href="/login">Log in</Link>
           </FieldDescription>
         </Field>
       </FieldGroup>
