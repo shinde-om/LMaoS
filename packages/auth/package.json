@@ -1,9 +1,21 @@
 {
   "name": "@workspace/auth",
   "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/auth.mjs",
+  "types": "./dist/auth.d.mts",
   "exports": {
-    ".": "./lib/auth.ts",
-    "./auth-client": "./lib/auth-client.ts"
+    ".": {
+      "types": "./dist/auth.d.mts",
+      "import": "./dist/auth.mjs"
+    },
+    "./auth-client": {
+      "types": "./dist/auth-client.d.mts",
+      "import": "./dist/auth-client.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tsdown"
   },
   "packageManager": "pnpm@10.33.4",
   "dependencies": {
@@ -16,6 +28,7 @@
   },
   "devDependencies": {
     "@types/node": "^26.1.0",
-    "@workspace/typescript-config": "workspace:*"
+    "@workspace/typescript-config": "workspace:*",
+    "tsdown": "^0.22.4"
   }
 }

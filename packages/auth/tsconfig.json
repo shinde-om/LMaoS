@@ -6,9 +6,6 @@
     "moduleResolution": "Bundler",
     "strictNullChecks": true,
     "types": ["node"],
-    "paths": {
-      "@workspace/auth": ["./lib/auth.ts"]
-    }
   },
   "include": ["."],
   "exclude": ["node_modules", "dist"]
