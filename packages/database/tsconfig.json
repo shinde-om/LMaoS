@@ -6,10 +6,6 @@
     "moduleResolution": "Bundler",
     "strictNullChecks": true,
     "types": ["node"],
-    "paths": {
-      "@workspace/db": ["./src/index.ts"],
-      "@workspace/db/*": ["./generated/prisma/*"]
-    }
   },
   "include": ["."],
   "exclude": ["node_modules", "dist"]
