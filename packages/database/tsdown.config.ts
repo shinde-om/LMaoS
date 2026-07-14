@@ -5,6 +5,6 @@ export default defineConfig({
   dts: {
     sourcemap: true,
   },
-  format: ["esm"],
+  format: ["esm", "cjs"],
   clean: true,
 })

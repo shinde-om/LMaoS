@@ -4,8 +4,8 @@
   "globalEnv": [
     "DATABASE_URL", 
     "BETTER_AUTH_SECRET", 
-    "BACKEND_URL", 
-    "BACKEND_URL_PORT", 
+    "BETTER_AUTH_URL", 
+    "NEST_PORT", 
     "GOOGLE_CLIENT_ID", 
     "GOOGLE_CLIENT_SECRET"
   ], 

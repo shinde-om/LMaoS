@@ -7,11 +7,13 @@
   "exports": {
     ".": {
       "types": "./dist/auth.d.mts",
-      "import": "./dist/auth.mjs"
+      "import": "./dist/auth.mjs",
+      "require": "./dist/auth.cjs"
     },
     "./auth-client": {
       "types": "./dist/auth-client.d.mts",
-      "import": "./dist/auth-client.mjs"
+      "import": "./dist/auth-client.mjs",
+      "require": "./dist/auth-client.cjs"
     }
   },
   "scripts": {
