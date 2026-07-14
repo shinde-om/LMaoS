@@ -1,7 +1,14 @@
 {
-  "$schema": "https://v2-10-4.turborepo.dev/schema.json",
+  "$schema": "https://v2-10-5.turborepo.dev/schema.json",
   "ui": "tui",
-  "globalEnv": ["DATABASE_URL", "BETTER_AUTH_SECRET", "BETTER_AUTH_URL", "GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET"], 
+  "globalEnv": [
+    "DATABASE_URL", 
+    "BETTER_AUTH_SECRET", 
+    "BACKEND_URL", 
+    "BACKEND_URL_PORT", 
+    "GOOGLE_CLIENT_ID", 
+    "GOOGLE_CLIENT_SECRET"
+  ], 
   "tasks": {
     "build": {
       "dependsOn": ["^build", "^db:generate"],
