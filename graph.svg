@@ -16,15 +16,16 @@
     <rect width="100%" height="100%" fill="url(#grid)"/>
   
   <g class="edges">
-    <path d="M 537.3333333333333 177.5 Q 453.99999999999994 152.83333333333334 370.66666666666663 177.5" fill="none" stroke="#7c3aed" stroke-width="1.5"  marker-end="url(#arrow-dependency)"/>
-    <path d="M 539.8538481353061 190.73344516273372 Q 310.8866094664474 224.1962838708074 120.91937079758875 356.3257892455477" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
-    <path d="M 537.3333333333333 177.5 Q 330.66666666666663 128.16666666666669 124 177.5" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
-    <path d="M 786.5205148019728 288.2334451627337 Q 690.6366094664475 297.612950537474 614.252704130922 356.3257892455477" fill="none" stroke="#7c3aed" stroke-width="1.5"  marker-end="url(#arrow-dependency)"/>
+    <path d="M 786.5205148019728 190.73344516273372 Q 690.6366094664475 200.11295053747403 614.252704130922 258.8257892455477" fill="none" stroke="#7c3aed" stroke-width="1.5"  marker-end="url(#arrow-dependency)"/>
+    <path d="M 784 177.5 Q 577.3333333333333 128.16666666666666 370.66666666666663 177.5" fill="none" stroke="#7c3aed" stroke-width="1.5"  marker-end="url(#arrow-dependency)"/>
+    <path d="M 785.1883653938978 186.67333614620262 Q 434.36795940067805 199.98074042819974 122.54755340745825 361.28814471019683" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
+    <path d="M 784 177.5 Q 454 103.5 124 177.5" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
+    <path d="M 786.5205148019728 359.2665548372663 Q 710.1366094664475 300.55371612919265 614.252704130922 291.1742107544523" fill="none" stroke="#7c3aed" stroke-width="1.5"  marker-end="url(#arrow-dependency)"/>
     <path d="M 298.4255464921739 199.82575040821385 Q 186.97123557494362 247.85269439908737 114.51692465771332 345.2129717232942" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
     <path d="M 290.66666666666663 177.5 Q 207.33333333333331 152.83333333333334 124 177.5" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
     <path d="M 298.4255464921739 350.1742495917862 Q 225.97123557494362 252.81397226757932 114.51692465771332 204.7870282767058" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
-    <path d="M 537.3333333333333 372.5 Q 453.99999999999994 347.8333333333333 370.66666666666663 372.5" fill="none" stroke="#7c3aed" stroke-width="1.5"  marker-end="url(#arrow-dependency)"/>
-    <path d="M 539.8538481353061 359.2665548372663 Q 349.8866094664474 227.13704946252602 120.91937079758875 193.6742107544523" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
+    <path d="M 539.8538481353061 288.2334451627337 Q 443.9699427997807 297.612950537474 367.58603746425536 356.3257892455477" fill="none" stroke="#7c3aed" stroke-width="1.5"  marker-end="url(#arrow-dependency)"/>
+    <path d="M 538.0164588872915 268.0201447463059 Q 340.3407638273379 177.69220613929934 123.16506876738441 186.03093419895941" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
   </g>
   
   <g class="nodes">
@@ -42,19 +43,19 @@
       <text text-anchor="middle" y="6" fill="white" font-size="10" font-weight="600" font-family="system-ui, sans-serif">eslint-confi</text>
       <text text-anchor="middle" y="18" fill="rgba(255,255,255,0.6)" font-size="8" font-family="system-ui, sans-serif">0d / 2r</text>
     </g>
-    <g transform="translate(573.3333333333333, 177.5)">
+    <g transform="translate(820, 177.5)">
       <circle r="36" fill="#7c3aed" stroke="#6d28d9" stroke-width="2"/>
       <circle r="28" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
       <text text-anchor="middle" y="-8" fill="white" font-size="12" font-family="system-ui, sans-serif">□</text>
       <text text-anchor="middle" y="6" fill="white" font-size="10" font-weight="600" font-family="system-ui, sans-serif">web</text>
-      <text text-anchor="middle" y="18" fill="rgba(255,255,255,0.6)" font-size="8" font-family="system-ui, sans-serif">3d / 0r</text>
+      <text text-anchor="middle" y="18" fill="rgba(255,255,255,0.6)" font-size="8" font-family="system-ui, sans-serif">4d / 0r</text>
     </g>
-    <g transform="translate(573.3333333333333, 372.5)">
-      <circle r="36" fill="#14b8a6" stroke="#0d9488" stroke-width="2"/>
+    <g transform="translate(820, 372.5)">
+      <circle r="36" fill="#7c3aed" stroke="#6d28d9" stroke-width="2"/>
       <circle r="28" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-      <text text-anchor="middle" y="-8" fill="white" font-size="12" font-family="system-ui, sans-serif">⊞</text>
-      <text text-anchor="middle" y="6" fill="white" font-size="10" font-weight="600" font-family="system-ui, sans-serif">auth</text>
-      <text text-anchor="middle" y="18" fill="rgba(255,255,255,0.6)" font-size="8" font-family="system-ui, sans-serif">2d / 1r</text>
+      <text text-anchor="middle" y="-8" fill="white" font-size="12" font-family="system-ui, sans-serif">□</text>
+      <text text-anchor="middle" y="6" fill="white" font-size="10" font-weight="600" font-family="system-ui, sans-serif">api</text>
+      <text text-anchor="middle" y="18" fill="rgba(255,255,255,0.6)" font-size="8" font-family="system-ui, sans-serif">1d / 0r</text>
     </g>
     <g transform="translate(326.66666666666663, 177.5)">
       <circle r="36" fill="#14b8a6" stroke="#0d9488" stroke-width="2"/>
@@ -70,12 +71,12 @@
       <text text-anchor="middle" y="6" fill="white" font-size="10" font-weight="600" font-family="system-ui, sans-serif">db</text>
       <text text-anchor="middle" y="18" fill="rgba(255,255,255,0.6)" font-size="8" font-family="system-ui, sans-serif">1d / 1r</text>
     </g>
-    <g transform="translate(820, 275)">
-      <circle r="36" fill="#7c3aed" stroke="#6d28d9" stroke-width="2"/>
+    <g transform="translate(573.3333333333333, 275)">
+      <circle r="36" fill="#14b8a6" stroke="#0d9488" stroke-width="2"/>
       <circle r="28" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-      <text text-anchor="middle" y="-8" fill="white" font-size="12" font-family="system-ui, sans-serif">□</text>
-      <text text-anchor="middle" y="6" fill="white" font-size="10" font-weight="600" font-family="system-ui, sans-serif">api</text>
-      <text text-anchor="middle" y="18" fill="rgba(255,255,255,0.6)" font-size="8" font-family="system-ui, sans-serif">1d / 0r</text>
+      <text text-anchor="middle" y="-8" fill="white" font-size="12" font-family="system-ui, sans-serif">⊞</text>
+      <text text-anchor="middle" y="6" fill="white" font-size="10" font-weight="600" font-family="system-ui, sans-serif">auth</text>
+      <text text-anchor="middle" y="18" fill="rgba(255,255,255,0.6)" font-size="8" font-family="system-ui, sans-serif">2d / 2r</text>
     </g>
   </g>
   
