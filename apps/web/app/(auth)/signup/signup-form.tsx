@@ -39,6 +39,8 @@ export function SignupForm({
       callbackURL: 'http://localhost:3000/dashboard'
     })
 
+    console.log(data, error)
+
     setDisabled(false)
   }
 

@@ -4,7 +4,7 @@ import { auth } from "./auth"
 
 export const authClient = createAuthClient({
   baseURL: process.env.BETTER_AUTH_URL,
-  basePath: "/api",
+  basePath: "/api/auth",
   plugins: [
     inferAdditionalFields<typeof auth>()
   ]

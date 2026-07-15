@@ -14,5 +14,7 @@ async function bootstrap() {
   })
 
   await app.listen(process.env.NEST_PORT ?? 4000)
+
+  console.log(`Backend is running on: ${await app.getUrl()}/api`)
 }
 bootstrap()
