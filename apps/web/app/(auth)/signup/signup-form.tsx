@@ -11,7 +11,7 @@ import {
 import { Input } from "@workspace/ui/components/input"
 import { SubmitEvent, useState } from "react"
 import Link from "next/link"
-import { authClient } from "@workspace/auth/auth-client"
+import { authClient } from "@/lib/auth-client"
 
 const names = ["Om Shinde", "Kanchan Barai"]
 

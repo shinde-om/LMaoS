@@ -2,10 +2,10 @@ import { createAuthClient } from "better-auth/client"
 import { inferAdditionalFields } from "better-auth/client/plugins"
 import { auth } from "./auth"
 
-export const authClient = createAuthClient({
-  baseURL: process.env.BETTER_AUTH_URL,
-  basePath: "/api/auth",
-  plugins: [
-    inferAdditionalFields<typeof auth>()
-  ]
-})
+export function createClient(baseURL: string) {
+  return createAuthClient({
+    baseURL,
+    basePath: "/api/auth",
+    plugins: [inferAdditionalFields<typeof auth>()],
+  })
+}
