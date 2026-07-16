@@ -1,5 +1,6 @@
 import { Geist_Mono, Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
+import {  TooltipProvider } from "@workspace/ui/components/tooltip"
 import { cn } from "@workspace/ui/lib/utils"
 import { Metadata } from "next"
 import "@workspace/ui/globals.css"
@@ -32,7 +33,11 @@ export default function RootLayout({
       )}
     >
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <TooltipProvider>
+            {children}
+            </TooltipProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

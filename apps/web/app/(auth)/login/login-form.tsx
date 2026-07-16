@@ -8,15 +8,52 @@ import {
   FieldLabel,
   FieldSeparator,
 } from "@workspace/ui/components/field"
+import { Checkbox } from "@workspace/ui/components/checkbox"
 import { Input } from "@workspace/ui/components/input"
 import Link from "next/link"
+import { SubmitEvent, useState } from "react"
+import { useRouter } from "next/navigation"
+import { authClient } from "@/lib/auth-client"
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [rememberMe, setRememberMe] = useState(false)
+  const [disabled, setDisabled] = useState(false)
+  const [isInvalid, setIsInvalid] = useState(false)
+  const router = useRouter()
+
+  async function submit(e: SubmitEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setDisabled(true)
+
+    const { data, error } = await authClient.signIn.email({
+      email,
+      password,
+      rememberMe,
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/dashboard")
+        },
+      },
+    })
+
+    if (error &&  error.code?.includes("INVALID")) {
+      setIsInvalid(true)
+    }
+
+    setDisabled(false)
+  }
+
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}>
+    <form
+      className={cn("flex flex-col gap-6", className)}
+      {...props}
+      onSubmit={submit}
+    >
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
           <h1 className="text-2xl font-bold">Login to your account</h1>
@@ -26,7 +63,17 @@ export function LoginForm({
         </div>
         <Field>
           <FieldLabel htmlFor="email">Email</FieldLabel>
-          <Input id="email" type="email" placeholder="name@your.domain" required />
+          <Input
+            id="email"
+            type="email"
+            placeholder="name@your.domain"
+            onChange={(e) => {
+              setEmail(e.target.value)
+              setIsInvalid(false)
+            }}
+            aria-invalid={isInvalid}
+            required
+          />
         </Field>
         <Field>
           <div className="flex items-center">
@@ -38,10 +85,33 @@ export function LoginForm({
               Forgot your password?
             </Link>
           </div>
-          <Input id="password" type="password" required />
+          <Input
+            id="password"
+            type="password"
+            onChange={(e) => {
+              setPassword(e.target.value)
+              setIsInvalid(false)
+            }}
+            aria-invalid={isInvalid}
+            required
+          />
+          <Field orientation="horizontal">
+            <Checkbox
+              id="terms-checkbox-basic"
+              name="terms-checkbox-basic"
+              onCheckedChange={() => setRememberMe(!rememberMe)}
+              defaultChecked={rememberMe}
+            />
+            <FieldLabel htmlFor="terms-checkbox-basic">Remember Me</FieldLabel>
+          </Field>
         </Field>
+        <FieldDescription hidden={!isInvalid}>
+          Please check your credentials again.
+        </FieldDescription>
         <Field>
-          <Button type="submit">Login</Button>
+          <Button type="submit" disabled={disabled}>
+            Login
+          </Button>
         </Field>
         <FieldSeparator>Or continue with</FieldSeparator>
         <Field>
