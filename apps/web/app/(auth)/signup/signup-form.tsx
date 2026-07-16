@@ -12,6 +12,7 @@ import { Input } from "@workspace/ui/components/input"
 import { SubmitEvent, useState } from "react"
 import Link from "next/link"
 import { authClient } from "@/lib/auth-client"
+import { useRouter } from "next/navigation"
 
 const names = ["Om Shinde", "Kanchan Barai"]
 
@@ -25,6 +26,7 @@ export function SignupForm({
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [disabled, setDisabled] = useState(false);
+  const router = useRouter();
 
   async function submit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -36,10 +38,15 @@ export function SignupForm({
       name,
       email,
       password,
-      callbackURL: 'http://localhost:3000/dashboard'
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/dashboard")
+        }
+      }
     })
 
-    console.log(data, error)
+    console.log(data)
+    console.log(error)
 
     setDisabled(false)
   }
