@@ -1,4 +1,3 @@
-
 import { AppSidebar } from "@/components/dashboard/app-sidebar"
 import {
   Breadcrumb,
@@ -18,10 +17,13 @@ import {
 import { auth } from "@workspace/auth"
 import { headers } from "next/headers"
 
-export default async function DashboardPage() {
+const someAuthenticatedAction = async () => {
+  "use server"
   const session = await auth.api.getSession({
     headers: await headers(),
   })
+}
+export default function DashboardPage() {
 
   return (
     <SidebarProvider>
@@ -55,7 +57,7 @@ export default async function DashboardPage() {
             <div className="aspect-video rounded-xl bg-muted/50" />
             <div className="aspect-video rounded-xl bg-muted/50" />
           </div>
-          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
+          <div className="min-h-screen flex-1 rounded-xl bg-muted/50 md:min-h-min" />
         </div>
       </SidebarInset>
     </SidebarProvider>
