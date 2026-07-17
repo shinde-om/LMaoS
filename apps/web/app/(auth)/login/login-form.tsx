@@ -40,6 +40,7 @@ export function LoginForm({
         },
       },
     })
+    console.log(error)
 
     if (error &&  error.code?.includes("INVALID")) {
       setIsInvalid(true)

@@ -31,7 +31,7 @@ import {
 } from "@workspace/ui/components/sidebar"
 import { authClient } from "@/lib/auth-client"
 import { useEffect, useState } from "react"
-import { redirect, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 
 export function NavUser() {
