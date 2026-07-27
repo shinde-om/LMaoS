@@ -9,3 +9,23 @@ allowBuilds:
   prisma: true
   sharp: true
   unrs-resolver: true
+
+minimumReleaseAgeExclude:
+  - postcss@8.5.10 || 8.5.12 || 8.5.18
+  - '@better-auth/oauth-provider@1.7.0-beta.4'
+  - '@hono/node-server@2.0.5'
+  - sharp@0.35.0
+  - find-my-way@9.6.1
+  - valibot@1.4.2
+  - brace-expansion@5.0.8
+
+overrides:
+  '@better-auth/oauth-provider@>=1.4.8 <1.7.0-beta.4': ^1.7.0-beta.4
+  '@hono/node-server@<2.0.5': ^2.0.5
+  brace-expansion@<=5.0.7: ^5.0.8
+  find-my-way@<=9.6.0: ^9.6.1
+  postcss@<8.5.10: ^8.5.10
+  postcss@<=8.5.11: ^8.5.12
+  postcss@<=8.5.17: ^8.5.18
+  sharp@<0.35.0: ^0.35.0
+  valibot@<=1.4.1: ^1.4.2

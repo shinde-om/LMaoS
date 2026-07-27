@@ -2,7 +2,6 @@
   "name": "@workspace/db",
   "version": "0.0.0",
   "type": "module",
-
   "main": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "exports": {
@@ -19,14 +18,14 @@
     "db:deploy": "prisma migrate deploy"
   },
   "devDependencies": {
-    "@types/node": "^20.19.41",
+    "@types/node": "^26.1.1",
     "@workspace/typescript-config": "workspace:*",
-    "prisma": "^7.8.0",
-    "tsdown": "^0.22.4"
+    "prisma": "^7.9.0",
+    "tsdown": "^0.22.14"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "^7.8.0",
-    "@prisma/client": "^7.8.0",
+    "@prisma/adapter-pg": "^7.9.0",
+    "@prisma/client": "^7.9.0",
     "dotenv": "^17.4.2",
     "pg": "^8.22.0"
   }
