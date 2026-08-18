@@ -1,0 +1,59 @@
+enum CourseLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  ALL_LEVELS
+}
+
+enum CourseStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  courses     Course[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("category")
+}
+
+model Course {
+  id              String         @id @default(cuid())
+  title           String
+  slug            String         @unique
+  description     String?        @db.Text
+  thumbnailUrl    String?
+  previewVideoUrl String?
+  price           Decimal        @default(0.0) @db.Decimal(10, 2)
+  isFree          Boolean        @default(false)
+  level           CourseLevel    @default(BEGINNER)
+  status          CourseStatus   @default(DRAFT)
+  
+  instructorId    String
+  instructor      User           @relation("InstructorCourses", fields: [instructorId], references: [id], onDelete: Cascade)
+  
+  categoryId      String?
+  category        Category?      @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  
+  organizationId  String?
+  organization    Organization?  @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+
+  sections        Section[]
+  enrollments     Enrollment[]
+  reviews         CourseReview[]
+  certificates    Certificate[]
+
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([instructorId])
+  @@index([categoryId])
+  @@index([organizationId])
+  @@map("course")
+}

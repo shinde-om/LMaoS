@@ -1,0 +1,62 @@
+enum LessonType {
+  VIDEO
+  ARTICLE
+  QUIZ
+  ASSIGNMENT
+}
+
+model Section {
+  id          String   @id @default(cuid())
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title       String
+  description String?  @db.Text
+  order       Int      @default(0)
+  isPublished Boolean  @default(false)
+  lessons     Lesson[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([courseId])
+  @@map("section")
+}
+
+model Lesson {
+  id          String           @id @default(cuid())
+  sectionId   String
+  section     Section          @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  title       String
+  slug        String
+  description String?          @db.Text
+  content     String?          @db.Text
+  type        LessonType       @default(VIDEO)
+  videoUrl    String?
+  duration    Int?             // Duration in seconds
+  order       Int              @default(0)
+  isFree      Boolean          @default(false)
+  isPublished Boolean          @default(false)
+  
+  attachments Attachment[]
+  quiz        Quiz?
+  progress    LessonProgress[]
+
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@index([sectionId])
+  @@map("lesson")
+}
+
+model Attachment {
+  id        String   @id @default(cuid())
+  lessonId  String
+  lesson    Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  name      String
+  fileUrl   String
+  fileSize  Int?     // Size in bytes
+  fileType  String?  // MIME type or file extension
+  createdAt DateTime @default(now())
+
+  @@index([lessonId])
+  @@map("attachment")
+}

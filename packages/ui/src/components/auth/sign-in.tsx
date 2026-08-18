@@ -84,8 +84,8 @@ export function SignIn({
   })
   const isPending = signInMutating + signUpMutating > 0
 
-  const Captcha = plugins.find(
-    (plugin) => plugin.captchaComponent
+  const Captcha = (
+    plugins.find((plugin) => (plugin as any).captchaComponent) as any
   )?.captchaComponent
 
   const [fieldErrors, setFieldErrors] = useState<{
@@ -254,7 +254,7 @@ export function SignIn({
                   </Button>
 
                   {plugins.flatMap((plugin) =>
-                    (plugin.authButtons ?? []).map((AuthButton, index) => (
+                    (((plugin as any).authButtons ?? []) as any[]).map((AuthButton: any, index: number) => (
                       <AuthButton
                         key={`${plugin.id}-${index.toString()}`}
                         view="signIn"

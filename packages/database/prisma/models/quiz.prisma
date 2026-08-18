@@ -1,0 +1,58 @@
+model Quiz {
+  id           String           @id @default(cuid())
+  lessonId     String           @unique
+  lesson       Lesson           @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  title        String
+  description  String?          @db.Text
+  passingScore Int              @default(70) // percentage
+  timeLimit    Int?             // in minutes (null = unlimited)
+  questions    Question[]
+  submissions  QuizSubmission[]
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  @@map("quiz")
+}
+
+model Question {
+  id          String           @id @default(cuid())
+  quizId      String
+  quiz        Quiz             @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  text        String           @db.Text
+  order       Int              @default(0)
+  points      Int              @default(1)
+  explanation String?          @db.Text
+  options     QuestionOption[]
+  createdAt   DateTime         @default(now())
+
+  @@index([quizId])
+  @@map("question")
+}
+
+model QuestionOption {
+  id         String   @id @default(cuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  text       String
+  isCorrect  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@index([questionId])
+  @@map("question_option")
+}
+
+model QuizSubmission {
+  id          String   @id @default(cuid())
+  quizId      String
+  quiz        Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  score       Float
+  isPassed    Boolean
+  answers     Json     // Record of questionId -> selectedOptionId(s)
+  submittedAt DateTime @default(now())
+
+  @@index([quizId])
+  @@index([userId])
+  @@map("quiz_submission")
+}

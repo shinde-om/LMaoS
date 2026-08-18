@@ -7,10 +7,17 @@ model User {
   image         String?
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
-  sessions      Session[]
-  accounts      Account[]
-  members       Member[]
-  invitations   Invitation[]
+  role            String           @default("student")
+  sessions        Session[]
+  accounts        Account[]
+  members         Member[]
+  invitations     Invitation[]
+  coursesCreated  Course[]         @relation("InstructorCourses")
+  enrollments     Enrollment[]
+  lessonProgress  LessonProgress[]
+  courseReviews   CourseReview[]
+  quizSubmissions QuizSubmission[]
+  certificates    Certificate[]
 
   @@unique([email])
   @@map("user")
@@ -74,6 +81,7 @@ model Organization {
   metadata    String?
   members     Member[]
   invitations Invitation[]
+  courses     Course[]
 
   @@unique([slug])
   @@map("organization")
