@@ -4,7 +4,7 @@ import {
   type AdditionalField as AdditionalFieldConfig,
   resolveInputType
 } from "@better-auth-ui/core"
-import { useAuth } from "@better-auth-ui/react"
+import { useAuth, useCopyToClipboard } from "@better-auth-ui/react"
 import { format } from "date-fns"
 import { CalendarIcon, Check, ChevronDownIcon, Copy } from "lucide-react"
 import { type ComponentType, useRef, useState } from "react"
@@ -34,7 +34,6 @@ import {
   InputGroupButton,
   InputGroupInput
 } from "@workspace/ui/components/input-group"
-import { Label } from "@workspace/ui/components/label"
 import {
   Popover,
   PopoverContent,
@@ -49,13 +48,15 @@ import {
 } from "@workspace/ui/components/select"
 import { Slider } from "@workspace/ui/components/slider"
 import { Switch } from "@workspace/ui/components/switch"
-import { Textarea } from "@workspace/ui/components/textarea.js"
+import { Textarea } from "@workspace/ui/components/textarea"
 import { cn } from "@workspace/ui/lib/utils"
 
 export type AdditionalFieldProps = {
   name: string
   field: AdditionalFieldConfig
   isPending?: boolean
+  /** Complete suffix appended to labels for fields that are not required. */
+  optionalLabel?: string
 }
 
 /** Convert a `defaultValue` into a `Date` for the calendar. */
@@ -87,25 +88,30 @@ function CopyButton({
   isDisabled?: boolean
 }) {
   const { localization } = useAuth()
-  const [copied, setCopied] = useState(false)
+  const { copied, copy } = useCopyToClipboard({
+    onError: (error) =>
+      toast.error(error instanceof Error ? error.message : String(error))
+  })
 
   async function handleCopy() {
     const value = getValue()
     if (!value) return
 
-    try {
-      await navigator.clipboard.writeText(value)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1500)
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : String(error))
-    }
+    await copy(value)
   }
 
   return (
     <InputGroupButton
-      aria-label={localization.settings.copyToClipboard}
-      title={localization.settings.copyToClipboard}
+      aria-label={
+        copied
+          ? localization.settings.copiedToClipboard
+          : localization.settings.copyToClipboard
+      }
+      title={
+        copied
+          ? localization.settings.copiedToClipboard
+          : localization.settings.copyToClipboard
+      }
       onClick={handleCopy}
       disabled={isDisabled}
     >
@@ -117,14 +123,34 @@ function CopyButton({
 /** Renders a single additional user field via shadcn primitives. */
 export function AdditionalField({
   name,
-  field,
-  isPending
+  field: configuredField,
+  isPending,
+  optionalLabel
 }: AdditionalFieldProps) {
+  const field =
+    optionalLabel && !configuredField.required
+      ? {
+          ...configuredField,
+          label: (
+            <>
+              {configuredField.label}
+              {optionalLabel}
+            </>
+          )
+        }
+      : configuredField
   const inputType = resolveInputType(field)
 
   if (field.render) {
     const FieldRenderer = field.render as ComponentType<AdditionalFieldProps>
-    return <FieldRenderer name={name} field={field} isPending={isPending} />
+    return (
+      <FieldRenderer
+        name={name}
+        field={field}
+        isPending={isPending}
+        optionalLabel={optionalLabel}
+      />
+    )
   }
 
   if (inputType === "hidden") {
@@ -146,7 +172,7 @@ export function AdditionalField({
   if (inputType === "textarea") {
     return (
       <Field>
-        <Label htmlFor={name}>{field.label}</Label>
+        <FieldLabel htmlFor={name}>{field.label}</FieldLabel>
 
         <Textarea
           id={name}
@@ -170,7 +196,7 @@ export function AdditionalField({
 
     return (
       <Field>
-        <Label htmlFor={name}>{field.label}</Label>
+        <FieldLabel htmlFor={name}>{field.label}</FieldLabel>
 
         <Input
           id={name}
@@ -247,7 +273,7 @@ export function AdditionalField({
   if (inputType === "select") {
     return (
       <Field>
-        <Label htmlFor={name}>{field.label}</Label>
+        <FieldLabel htmlFor={name}>{field.label}</FieldLabel>
 
         <Select
           name={name}
@@ -278,7 +304,7 @@ export function AdditionalField({
   if (inputType === "combobox") {
     return (
       <Field>
-        <Label htmlFor={name}>{field.label}</Label>
+        <FieldLabel htmlFor={name}>{field.label}</FieldLabel>
 
         <Combobox
           items={field.options ?? []}
@@ -335,7 +361,7 @@ function InputField({ name, field, isPending }: AdditionalFieldProps) {
   if (hasPrefix || hasSuffix) {
     return (
       <Field>
-        <Label htmlFor={name}>{field.label}</Label>
+        <FieldLabel htmlFor={name}>{field.label}</FieldLabel>
 
         <InputGroup>
           {hasPrefix && (
@@ -385,7 +411,7 @@ function InputField({ name, field, isPending }: AdditionalFieldProps) {
 
   return (
     <Field>
-      <Label htmlFor={name}>{field.label}</Label>
+      <FieldLabel htmlFor={name}>{field.label}</FieldLabel>
 
       <Input
         id={name}
@@ -432,7 +458,7 @@ function SliderField({ name, field, isPending }: AdditionalFieldProps) {
   return (
     <Field>
       <div className="flex items-center justify-between gap-2">
-        <Label htmlFor={name}>{field.label}</Label>
+        <FieldLabel htmlFor={name}>{field.label}</FieldLabel>
         <span className="text-sm text-muted-foreground tabular-nums">
           {formatter.format(value)}
         </span>
@@ -494,7 +520,7 @@ function DateInput({ name, field, isPending }: AdditionalFieldProps) {
 
   return (
     <Field data-invalid={!!error}>
-      <Label htmlFor={`${name}-date`}>{field.label}</Label>
+      <FieldLabel htmlFor={`${name}-date`}>{field.label}</FieldLabel>
 
       <div className="relative flex gap-2">
         {/* Visually-hidden input so required constraint validation fires on submit.
@@ -502,14 +528,14 @@ function DateInput({ name, field, isPending }: AdditionalFieldProps) {
             through the styled <FieldError> below — matching the pattern used by
             the Name / Email / Password fields in the sign-up form. */}
         <input
+          aria-label={typeof field.label === "string" ? field.label : name}
           type="text"
           name={name}
           value={formValue}
           onChange={() => {}}
           required={field.required}
           tabIndex={-1}
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full opacity-0"
+          className="sr-only"
           onInvalid={(e) => {
             e.preventDefault()
             setError((e.target as HTMLInputElement).validationMessage)
@@ -550,9 +576,9 @@ function DateInput({ name, field, isPending }: AdditionalFieldProps) {
 
         {isDateTime && (
           <Field className="w-32">
-            <Label htmlFor={`${name}-time`} className="sr-only">
+            <FieldLabel htmlFor={`${name}-time`} className="sr-only">
               {localization.settings.time}
-            </Label>
+            </FieldLabel>
 
             <Input
               type="time"
