@@ -21,15 +21,15 @@
   },
   "packageManager": "pnpm@10.33.4",
   "dependencies": {
-    "@prisma/adapter-pg": "^7.9.0",
-    "@prisma/client": "^7.9.0",
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "^7.10.0",
     "@workspace/db": "workspace:*",
-    "better-auth": "^1.6.25",
+    "better-auth": "^1.7.3",
     "dotenv": "^17.4.2",
-    "pg": "^8.22.0"
+    "pg": "^8.23.0"
   },
   "devDependencies": {
-    "@types/node": "^26.1.1",
+    "@types/node": "^26.5.0",
     "@workspace/typescript-config": "workspace:*",
     "tsdown": "^0.22.14"
   }
