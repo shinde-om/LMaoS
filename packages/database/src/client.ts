@@ -1,12 +1,16 @@
 import { PrismaClient } from "../generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
+import { getLogger } from "@workspace/logger";
+
+const dbLogger = getLogger('DATABASE');
+
 
 const connectionString = process.env.DATABASE_URL;
 
 if (!connectionString) {
   const error = new Error("DATABASE_URL environment variable is missing or empty.");
-  console.error(`[DATABASE ERROR] ${error.message}`);
+  dbLogger.error(error.message)
   if (typeof process !== "undefined" && typeof process.exit === "function") {
     process.exit(1);
   }
@@ -19,7 +23,7 @@ export const pool = new Pool({
 });
 
 pool.on("error", (err: Error) => {
-  console.error("[DATABASE ERROR] Unexpected error on idle client:", err);
+  dbLogger.error("Unexpected error on idle client:", err);
 });
 
 export const connectionPromise = (async () => {
@@ -27,7 +31,7 @@ export const connectionPromise = (async () => {
     const client = await pool.connect();
     client.release();
   } catch (err) {
-    console.error(`[DATABASE ERROR] Failed to connect to database at ${connectionString}:`, err);
+    dbLogger.error(`Failed to connect to database at ${connectionString}:`, err);
     if (typeof process !== "undefined" && typeof process.exit === "function") {
       process.exit(1);
     }
