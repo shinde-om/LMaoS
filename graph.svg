@@ -18,25 +18,33 @@
   <g class="edges">
     <path d="M 786.5205148019728 190.73344516273372 Q 690.6366094664475 200.11295053747403 614.252704130922 258.8257892455477" fill="none" stroke="#7c3aed" stroke-width="1.5"  marker-end="url(#arrow-dependency)"/>
     <path d="M 784 177.5 Q 577.3333333333333 128.16666666666666 370.66666666666663 177.5" fill="none" stroke="#7c3aed" stroke-width="1.5"  marker-end="url(#arrow-dependency)"/>
-    <path d="M 785.1883653938978 186.67333614620262 Q 434.36795940067805 199.98074042819974 122.54755340745825 361.28814471019683" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
-    <path d="M 784 177.5 Q 454 103.5 124 177.5" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
+    <path d="M 785.5894431015524 188.07892120864435 Q 431.0733952109386 216.0745643101506 122.05734732032477 392.0702074116569" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
+    <path d="M 784.0346695391434 175.92044156759752 Q 457.2461478289841 87.42550649248918 123.95762611882485 146.93057141738083" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
     <path d="M 786.5205148019728 359.2665548372663 Q 710.1366094664475 300.55371612919265 614.252704130922 291.1742107544523" fill="none" stroke="#7c3aed" stroke-width="1.5"  marker-end="url(#arrow-dependency)"/>
-    <path d="M 298.4255464921739 199.82575040821385 Q 186.97123557494362 247.85269439908737 114.51692465771332 345.2129717232942" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
-    <path d="M 290.66666666666663 177.5 Q 207.33333333333331 152.83333333333334 124 177.5" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
-    <path d="M 298.4255464921739 350.1742495917862 Q 225.97123557494362 252.81397226757932 114.51692465771332 204.7870282767058" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
+    <path d="M 300.20346226491324 201.9069418975631 Q 183.52368937797257 263.87145090027076 112.3439164910319 375.1692932363118" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
+    <path d="M 290.97513339941924 172.7973993330316 Q 210.54905925191636 137.10584451855206 123.62298510441349 150.74762303740584" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
+    <path d="M 293.18718146863944 359.2665548372663 Q 216.80327613311408 300.55371612919265 120.91937079758875 291.1742107544523" fill="none" stroke="#7c3aed" stroke-width="1.5"  marker-end="url(#arrow-dependency)"/>
+    <path d="M 300.20346226491324 348.0930581024369 Q 229.02368937797257 236.7952157663959 112.3439164910319 174.83070676368823" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
     <path d="M 539.8538481353061 288.2334451627337 Q 443.9699427997807 297.612950537474 367.58603746425536 356.3257892455477" fill="none" stroke="#7c3aed" stroke-width="1.5"  marker-end="url(#arrow-dependency)"/>
-    <path d="M 538.0164588872915 268.0201447463059 Q 340.3407638273379 177.69220613929934 123.16506876738441 186.03093419895941" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
+    <path d="M 538.5216987272311 265.8266638537974 Q 343.5346260673447 161.685926238467 122.54755340745825 156.2118552898032" fill="none" stroke="#eab308" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-devDependency)"/>
   </g>
   
   <g class="nodes">
-    <g transform="translate(80, 177.5)">
+    <g transform="translate(80, 145)">
       <circle r="36" fill="#14b8a6" stroke="#0d9488" stroke-width="2"/>
       <circle r="28" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
       <text text-anchor="middle" y="-8" fill="white" font-size="12" font-family="system-ui, sans-serif">⊞</text>
       <text text-anchor="middle" y="6" fill="white" font-size="10" font-weight="600" font-family="system-ui, sans-serif">typescript-c</text>
       <text text-anchor="middle" y="18" fill="rgba(255,255,255,0.6)" font-size="8" font-family="system-ui, sans-serif">0d / 4r</text>
     </g>
-    <g transform="translate(80, 372.5)">
+    <g transform="translate(80, 275)">
+      <circle r="36" fill="#14b8a6" stroke="#0d9488" stroke-width="2"/>
+      <circle r="28" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+      <text text-anchor="middle" y="-8" fill="white" font-size="12" font-family="system-ui, sans-serif">⊞</text>
+      <text text-anchor="middle" y="6" fill="white" font-size="10" font-weight="600" font-family="system-ui, sans-serif">logger</text>
+      <text text-anchor="middle" y="18" fill="rgba(255,255,255,0.6)" font-size="8" font-family="system-ui, sans-serif">0d / 1r</text>
+    </g>
+    <g transform="translate(80, 405)">
       <circle r="36" fill="#14b8a6" stroke="#0d9488" stroke-width="2"/>
       <circle r="28" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
       <text text-anchor="middle" y="-8" fill="white" font-size="12" font-family="system-ui, sans-serif">⊞</text>
@@ -69,7 +77,7 @@
       <circle r="28" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
       <text text-anchor="middle" y="-8" fill="white" font-size="12" font-family="system-ui, sans-serif">⊞</text>
       <text text-anchor="middle" y="6" fill="white" font-size="10" font-weight="600" font-family="system-ui, sans-serif">db</text>
-      <text text-anchor="middle" y="18" fill="rgba(255,255,255,0.6)" font-size="8" font-family="system-ui, sans-serif">1d / 1r</text>
+      <text text-anchor="middle" y="18" fill="rgba(255,255,255,0.6)" font-size="8" font-family="system-ui, sans-serif">2d / 1r</text>
     </g>
     <g transform="translate(573.3333333333333, 275)">
       <circle r="36" fill="#14b8a6" stroke="#0d9488" stroke-width="2"/>
