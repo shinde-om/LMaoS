@@ -1,2 +1,2 @@
-export { prisma } from "./client"; // exports instance of prisma
+export { prisma, pool, connectionPromise } from "./client"; // exports instance of prisma
 export * from "../generated/prisma/client"; // exports generated types from prisma
