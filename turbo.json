@@ -26,17 +26,17 @@
     },
     "dev": {
       "dependsOn": ["^build","^db:generate"],
-      "cache": false,
+      "cache": true,
       "persistent": true
     },
     "db:generate": { 
-      "cache": false
+      "cache": true
     }, 
     "db:migrate": { 
-      "cache": false
+      "cache": true
     }, 
     "db:deploy": { 
-      "cache": false
+      "cache": true
     } 
   }
 }
