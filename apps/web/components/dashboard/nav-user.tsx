@@ -32,14 +32,23 @@ import {
 import { authClient } from "@/lib/auth-client"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import { UserOverlay } from "./user-overlay"
 
+const ACCOUNT_MENU_ITEMS = [
+  { icon: Sparkles, label: "Upgrade to Pro", section: "billing" as const },
+  { icon: BadgeCheck, label: "Account", section: "account" as const },
+  { icon: CreditCard, label: "Billing", section: "billing" as const },
+  { icon: Bell, label: "Notifications", section: "notifications" as const },
+]
 
 export function NavUser() {
   const [name, setName] = useState("")
   const [avatar, setAvatar] = useState("")
   const [email, setEmail] = useState("")
+  const [settingsOpen, setSettingsOpen] = useState(false)
+  const [settingsOption, setSettingsOption] = useState("")
   const router = useRouter()
-  
+
   function logOut() {
     authClient.signOut({
       fetchOptions: {
@@ -103,25 +112,20 @@ export function NavUser() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
-              </DropdownMenuItem>
+              {ACCOUNT_MENU_ITEMS.slice(1).map(
+                ({ icon: Icon, label, section }) => (
+                  <DropdownMenuItem
+                    key={section}
+                    onClick={() => {
+                      setSettingsOption(section)
+                      setSettingsOpen(true)
+                    }}
+                  >
+                    <Icon />
+                    {label}
+                  </DropdownMenuItem>
+                )
+              )}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={logOut} variant="destructive">
@@ -131,6 +135,11 @@ export function NavUser() {
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
+      <UserOverlay
+        open={settingsOpen}
+        onOpenChange={setSettingsOpen}
+        path={settingsOption}
+      />
     </SidebarMenu>
   )
 }
