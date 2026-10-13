@@ -15,7 +15,7 @@ import {
 } from "@workspace/ui/components/dropdown-menu"
 import { Field, FieldLabel } from "@workspace/ui/components/field"
 import { Spinner } from "@workspace/ui/components/spinner"
-import { cn } from "@workspace/ui/lib/utils"
+import { cn } from "cn"
 
 export type ChangeAvatarProps = {
   className?: string
@@ -57,9 +57,8 @@ export function ChangeAvatar({ className }: ChangeAvatarProps) {
         }
       )
     } catch (error) {
-      if (error instanceof Error) {
-        toast.error(error.message)
-      }
+      console.error("[Better Auth UI] Image operation failed", error)
+      toast.error(localization.errors.imageUploadFailed)
     }
 
     setIsUploading(false)

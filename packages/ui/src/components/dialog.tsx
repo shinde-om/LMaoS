@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
+import { cn } from "cn"
 import { Dialog as DialogPrimitive } from "radix-ui"
 
-import { cn } from "@workspace/ui/lib/utils"
 import { Button } from "@workspace/ui/components/button"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { Cancel01Icon } from "@hugeicons/core-free-icons"

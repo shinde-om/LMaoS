@@ -12,7 +12,7 @@ import {
   ItemSeparator
 } from "@workspace/ui/components/item"
 import { Skeleton } from "@workspace/ui/components/skeleton"
-import { cn } from "@workspace/ui/lib/utils"
+import { cn } from "cn"
 import { LinkedAccount } from "./linked-account"
 
 export type LinkedAccountsProps = {
@@ -31,6 +31,7 @@ export type LinkedAccountsProps = {
 export function LinkedAccounts({ className }: LinkedAccountsProps) {
   const {
     authClient,
+    allowUnlinkingAllAccounts,
     localization,
     multipleAccountsPerProvider,
     socialProviders
@@ -41,6 +42,8 @@ export function LinkedAccounts({ className }: LinkedAccountsProps) {
   const linkedAccounts = accounts?.filter(
     (account) => account.providerId !== "credential"
   )
+  const canUnlink =
+    allowUnlinkingAllAccounts === true || (accounts?.length ?? 0) > 1
 
   const linkedProviderIds = new Set(linkedAccounts?.map((a) => a.providerId))
 
@@ -88,6 +91,7 @@ export function LinkedAccounts({ className }: LinkedAccountsProps) {
                     {index > 0 && <ItemSeparator />}
                     <LinkedAccount
                       account={row.account}
+                      canUnlink={canUnlink}
                       provider={row.provider}
                     />
                   </Fragment>

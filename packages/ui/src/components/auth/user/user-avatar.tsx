@@ -8,7 +8,7 @@ import type { ReactNode } from "react"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@workspace/ui/components/avatar"
 import { Skeleton } from "@workspace/ui/components/skeleton"
-import { cn } from "@workspace/ui/lib/utils"
+import { cn } from "cn"
 
 export type UserAvatarProps = {
   className?: string

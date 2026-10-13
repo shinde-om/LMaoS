@@ -1,6 +1,6 @@
 "use client"
 
-import { isSessionNotFreshError } from "@better-auth-ui/core"
+import { isReauthenticationRequiredError } from "@better-auth-ui/core"
 import { useAuth, useListSessions, useSession } from "@better-auth-ui/react"
 import { Fragment } from "react"
 import { Card, CardContent } from "@workspace/ui/components/card"
@@ -12,9 +12,9 @@ import {
   ItemSeparator
 } from "@workspace/ui/components/item"
 import { Skeleton } from "@workspace/ui/components/skeleton"
-import { cn } from "@workspace/ui/lib/utils"
+import { cn } from "cn"
+import { ReauthenticationAction } from "../../reauthentication"
 import { ActiveSession } from "./active-session"
-import { FreshSessionPrompt } from "./fresh-session-prompt"
 import { SessionActions } from "./session-actions"
 
 export type ActiveSessionsProps = {
@@ -33,7 +33,9 @@ export function ActiveSessions({ className }: ActiveSessionsProps) {
   const { authClient, localization } = useAuth()
   const { data: session } = useSession(authClient)
 
-  const sessionsQuery = useListSessions(authClient)
+  const sessionsQuery = useListSessions(authClient, {
+    meta: { errorPresentation: "inline" }
+  })
   const { data: sessions, error, isPending } = sessionsQuery
 
   const activeSessions = [...(sessions ?? [])].sort((activeSession) =>
@@ -46,17 +48,19 @@ export function ActiveSessions({ className }: ActiveSessionsProps) {
         {localization.settings.activeSessions}
       </h2>
 
-      <Card className={cn("p-0", className)}>
+      <Card className={cn("gap-0 p-0", className)}>
         <CardContent className="p-0">
-          {isSessionNotFreshError(error) ? (
-            <FreshSessionPrompt onFresh={() => sessionsQuery.refetch()} />
+          {isReauthenticationRequiredError(error) ? (
+            <ReauthenticationAction />
+          ) : error ? (
+            <div className="p-4 text-destructive text-sm">{error.message}</div>
           ) : isPending ? (
             <SessionRowSkeleton />
           ) : (
-            <ItemGroup className="gap-0">
+            <ItemGroup className="gap-0!">
               {activeSessions?.map((activeSession, index) => (
                 <Fragment key={activeSession.id}>
-                  {index > 0 && <ItemSeparator />}
+                  {index > 0 && <ItemSeparator className="my-0!" />}
                   <ActiveSession activeSession={activeSession} />
                 </Fragment>
               ))}

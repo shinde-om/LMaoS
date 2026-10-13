@@ -1,15 +1,16 @@
 "use client"
 
 import { useAuth, useSendVerificationEmail } from "@better-auth-ui/react"
-import { useEffect, useState, useSyncExternalStore } from "react"
+import { useEffect, useState } from "react"
 import { toast } from "sonner"
 
 import { Button } from "@workspace/ui/components/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@workspace/ui/components/card"
 import { FieldDescription } from "@workspace/ui/components/field"
 import { Spinner } from "@workspace/ui/components/spinner"
-import { cn } from "@workspace/ui/lib/utils"
+import { cn } from "cn"
 import { OpenEmailButton } from "./open-email-button"
+import { useIsHydrated } from "./use-is-hydrated"
 
 export type VerifyEmailProps = {
   className?: string
@@ -17,22 +18,6 @@ export type VerifyEmailProps = {
 
 /** Seconds the resend button stays disabled to prevent spamming the endpoint. */
 const RESEND_COOLDOWN_SECONDS = 60
-
-/**
- * Returns `true` once the component is mounted on the client (hydrated) and
- * `false` while rendering on the server, so client-only reads (e.g.
- * `sessionStorage`) stay safe during SSR.
- *
- * @returns Whether the component has hydrated on the client.
- */
-function useIsHydrated() {
-  const subscribe = () => () => {}
-  return useSyncExternalStore(
-    subscribe,
-    () => true,
-    () => false
-  )
-}
 
 /**
  * Render a card prompting the user to verify their email, with a resend button

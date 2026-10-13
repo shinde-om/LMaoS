@@ -2,8 +2,10 @@
 
 import {
   type AuthSocialProvider,
+  getAuthErrorMessage,
   getProviderId,
-  getProviderName
+  getProviderName,
+  isReauthenticationRequiredError
 } from "@better-auth-ui/core"
 import {
   renderProviderIcon,
@@ -18,6 +20,12 @@ import { toast } from "sonner"
 
 import { Button } from "@workspace/ui/components/button"
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle
+} from "@workspace/ui/components/dialog"
+import {
   Item,
   ItemActions,
   ItemContent,
@@ -27,10 +35,12 @@ import {
 } from "@workspace/ui/components/item"
 import { Skeleton } from "@workspace/ui/components/skeleton"
 import { Spinner } from "@workspace/ui/components/spinner"
-import { cn } from "@workspace/ui/lib/utils"
+import { cn } from "cn"
+import { ReauthenticationAction } from "../../reauthentication"
 
 export type LinkedAccountProps = {
   account?: Account
+  canUnlink?: boolean
   provider: AuthSocialProvider | string
 }
 
@@ -44,7 +54,11 @@ export type LinkedAccountProps = {
  * @param provider - The provider id
  * @returns A JSX element containing the linked account row
  */
-export function LinkedAccount({ account, provider }: LinkedAccountProps) {
+export function LinkedAccount({
+  account,
+  canUnlink = true,
+  provider
+}: LinkedAccountProps) {
   const { authClient, baseURL, localization } = useAuth()
 
   const { data: accountInfo, isPending: isLoadingInfo } = useAccountInfo(
@@ -54,12 +68,19 @@ export function LinkedAccount({ account, provider }: LinkedAccountProps) {
 
   const { mutate: linkSocial, isPending: isLinking } = useLinkSocial(authClient)
 
-  const { mutate: unlinkAccount, isPending: isUnlinking } = useUnlinkAccount(
-    authClient,
-    {
-      onSuccess: () => toast.success(localization.settings.accountUnlinked)
-    }
-  )
+  const unlinkAccount = useUnlinkAccount(authClient, {
+    meta: { errorPresentation: "inline" },
+    onError: (error) => {
+      if (!isReauthenticationRequiredError(error)) {
+        const message = getAuthErrorMessage(error, localization)
+        if (message) {
+          console.error("[Better Auth UI]", error)
+          toast.error(message)
+        }
+      }
+    },
+    onSuccess: () => toast.success(localization.settings.accountUnlinked)
+  })
 
   const providerId = getProviderId(provider)
   const providerIcon = renderProviderIcon(provider)
@@ -75,64 +96,92 @@ export function LinkedAccount({ account, provider }: LinkedAccountProps) {
     accountInfo?.user?.name ||
     account?.accountId
 
+  const needsReauthentication = isReauthenticationRequiredError(
+    unlinkAccount.error
+  )
+
   return (
-    <Item>
-      <ItemMedia variant="icon" className={cn(!account && "opacity-50")}>
-        {providerIcon ? providerIcon : <Plug />}
-      </ItemMedia>
-      <ItemContent>
-        <ItemTitle>{providerName}</ItemTitle>
-        {account && isLoadingInfo ? (
-          <Skeleton className="my-0.5 h-3 w-24" />
-        ) : (
-          <ItemDescription>
-            {account
-              ? displayName
-              : localization.settings.linkProvider.replace(
-                  "{{provider}}",
-                  providerName
-                )}
-          </ItemDescription>
-        )}
-      </ItemContent>
-      <ItemActions>
-        {account ? (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => unlinkAccount({ accountId: account.id })}
-            disabled={isUnlinking}
-            aria-label={localization.settings.unlinkProvider.replace(
-              "{{provider}}",
-              providerName
-            )}
-          >
-            {isUnlinking ? <Spinner /> : <Link2Off />}
-            {localization.settings.unlinkProvider
-              .replace("{{provider}}", "")
-              .trim()}
-          </Button>
-        ) : (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() =>
-              linkSocial({
-                provider: providerId,
-                callbackURL: `${baseURL}${window.location.pathname}`
-              })
-            }
-            disabled={isLinking}
-            aria-label={localization.settings.linkProvider.replace(
-              "{{provider}}",
-              providerName
-            )}
-          >
-            {isLinking ? <Spinner /> : <Link2 />}
-            {localization.settings.link}
-          </Button>
-        )}
-      </ItemActions>
-    </Item>
+    <>
+      <Item>
+        <ItemMedia variant="icon" className={cn(!account && "opacity-50")}>
+          {providerIcon ? providerIcon : <Plug />}
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>{providerName}</ItemTitle>
+          {account && isLoadingInfo ? (
+            <Skeleton className="my-0.5 h-3 w-24" />
+          ) : (
+            <ItemDescription>
+              {account
+                ? displayName
+                : localization.settings.linkProvider.replace(
+                    "{{provider}}",
+                    providerName
+                  )}
+            </ItemDescription>
+          )}
+        </ItemContent>
+        <ItemActions>
+          {account ? (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => unlinkAccount.mutate({ accountId: account.id })}
+              disabled={unlinkAccount.isPending || !canUnlink}
+              title={
+                canUnlink
+                  ? undefined
+                  : localization.settings.lastAccountUnlinkingDisabled
+              }
+              aria-label={localization.settings.unlinkProvider.replace(
+                "{{provider}}",
+                providerName
+              )}
+            >
+              {unlinkAccount.isPending ? <Spinner /> : <Link2Off />}
+              {localization.settings.unlinkProvider
+                .replace("{{provider}}", "")
+                .trim()}
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() =>
+                linkSocial({
+                  provider: providerId,
+                  callbackURL: `${baseURL}${window.location.pathname}`
+                })
+              }
+              disabled={isLinking}
+              aria-label={localization.settings.linkProvider.replace(
+                "{{provider}}",
+                providerName
+              )}
+            >
+              {isLinking ? <Spinner /> : <Link2 />}
+              {localization.settings.link}
+            </Button>
+          )}
+        </ItemActions>
+      </Item>
+      {account && (
+        <Dialog
+          open={needsReauthentication}
+          onOpenChange={(nextOpen) => {
+            if (!nextOpen) unlinkAccount.reset()
+          }}
+        >
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle className="sr-only">
+                {localization.settings.reauthenticationTitle}
+              </DialogTitle>
+            </DialogHeader>
+            <ReauthenticationAction showTitle={false} />
+          </DialogContent>
+        </Dialog>
+      )}
+    </>
   )
 }

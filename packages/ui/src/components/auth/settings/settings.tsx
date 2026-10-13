@@ -6,7 +6,7 @@ import { Shield, User2 } from "lucide-react"
 import { useMemo } from "react"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@workspace/ui/components/tabs"
-import { cn } from "@workspace/ui/lib/utils"
+import { cn } from "cn"
 import { AccountSettings } from "./account/account-settings"
 import { SecuritySettings } from "./security/security-settings"
 
