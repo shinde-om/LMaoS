@@ -4,6 +4,7 @@ import {
   Folder,
   Forward,
   MoreHorizontal,
+  Plus,
   Trash2,
   type LucideIcon,
 } from "@workspace/ui/lucide-react"
@@ -79,8 +80,8 @@ export function NavProjects({
         ))}
         <SidebarMenuItem>
           <SidebarMenuButton className="text-sidebar-foreground/70">
-            <MoreHorizontal className="text-sidebar-foreground/70" />
-            <span>More</span>
+            <Plus className="text-sidebar-foreground/70" />
+            <span>Create New</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>
