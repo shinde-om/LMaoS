@@ -18,17 +18,17 @@
     "db:deploy": "prisma migrate deploy"
   },
   "devDependencies": {
-    "@types/node": "^26.5.0",
+    "@types/node": "^26.6.5",
     "@types/pg": "^8.23.1",
     "@workspace/typescript-config": "workspace:*",
-    "prisma": "^7.10.0",
+    "prisma": "^7.10.1",
     "tsdown": "^0.22.14"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.10.1",
+    "@prisma/client": "^7.10.1",
     "@workspace/logger": "workspace:*",
-    "@prisma/adapter-pg": "^7.10.0",
-    "@prisma/client": "^7.10.0",
     "dotenv": "^17.4.2",
-    "pg": "^8.23.0"
+    "pg": "^8.23.1"
   }
 }
