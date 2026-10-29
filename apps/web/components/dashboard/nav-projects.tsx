@@ -25,6 +25,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@workspace/ui/components/sidebar"
+import { NewLmsDialog } from "@/components/dashboard/new-project-dialog"
 
 export function NavProjects({
   projects,
@@ -79,10 +80,14 @@ export function NavProjects({
           </SidebarMenuItem>
         ))}
         <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
-            <Plus className="text-sidebar-foreground/70" />
-            <span>Create New</span>
-          </SidebarMenuButton>
+          <NewLmsDialog
+            trigger={
+              <SidebarMenuButton className="text-sidebar-foreground/70">
+                <Plus className="text-sidebar-foreground/70" />
+                <span>Create New</span>
+              </SidebarMenuButton>
+            }
+          />
         </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
